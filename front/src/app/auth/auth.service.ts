@@ -11,6 +11,7 @@ import 'rxjs/add/operator/toPromise';
 //inject route service
 
 interface AccessToken {
+    name:string,
     token: string;
 }
 @Injectable()
@@ -46,7 +47,7 @@ export class AuthService {
         ).toPromise()
         .then(result => {
             this.uiService.loadingStateChanged.next(false);
-            this.authSuccessfully(result.token);
+            this.authSuccessfully(result.token, result.name);
         })
         .catch(error => {
             this.uiService.loadingStateChanged.next(false);
@@ -74,7 +75,7 @@ export class AuthService {
         ).toPromise()
         .then(result => {
             this.uiService.loadingStateChanged.next(false);
-            this.authSuccessfully(result.token);
+            this.authSuccessfully(result.token, result.name);
         })
         .catch(error => {
             this.uiService.loadingStateChanged.next(false);
@@ -86,6 +87,7 @@ export class AuthService {
         this.user = null;
         this.authChange.next(false);
         localStorage.removeItem('accessToken');
+        localStorage.removeItem('currentUser');
         this.router.navigate(['/login']);
     }
 
@@ -97,9 +99,10 @@ export class AuthService {
         return <string>localStorage.getItem('accessToken') != null;
     }
 
-    private authSuccessfully(token: string) {
+    private authSuccessfully(token: string, name: string) {
         localStorage.setItem('accessToken', token);
+        localStorage.setItem('currentUser', name);
         this.authChange.next(true);
-        this.router.navigate(['/welcome']);
+        this.router.navigate(['/reservation']);
     }
 }

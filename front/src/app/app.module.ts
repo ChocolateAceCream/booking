@@ -14,6 +14,10 @@ import { HeaderComponent } from './navigation/header/header.component';
 import { AuthService } from './auth/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UIService } from './shared/ui.service';
+import { ReservationComponent } from './reservation/reservation.component';
+import { NewReservationComponent } from './reservation/new-reservation/new-reservation.component';
+import { ReservationService } from './reservation/reservation.service';
+import { AllReservationComponent } from './reservation/all-reservation/all-reservation.component';
 
 @NgModule({
     declarations: [
@@ -22,6 +26,9 @@ import { UIService } from './shared/ui.service';
         SignupComponent,
         WelcomeComponent,
         HeaderComponent,
+        ReservationComponent,
+        NewReservationComponent,
+        AllReservationComponent,
     ],
     imports: [
         BrowserModule,
@@ -34,7 +41,7 @@ import { UIService } from './shared/ui.service';
         ReactiveFormsModule
 
     ],
-    providers: [AuthService, UIService],
+    providers: [AuthService, UIService, ReservationService],
     bootstrap: [AppComponent]
 
 })

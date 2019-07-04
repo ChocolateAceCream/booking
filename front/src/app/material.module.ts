@@ -17,6 +17,7 @@ import {
     MatSortModule,
     MatPaginatorModule,
     MatSnackBarModule,
+    MatStepperModule,
     MatInputModule
 } from '@angular/material';
 @NgModule({
@@ -38,6 +39,7 @@ import {
         MatSnackBarModule,
         MatProgressSpinnerModule,
         MatListModule,
+        MatStepperModule,
         MatCheckboxModule
     ],
     exports: [
@@ -58,6 +60,7 @@ import {
         MatSnackBarModule,
         MatProgressSpinnerModule,
         MatSelectModule,
+        MatStepperModule,
         MatInputModule
     ]
 })

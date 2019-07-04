@@ -3,7 +3,10 @@ class Seat
     field :name, type: String
     field :date, type: Hash, default: {}
 
-    def self.valid?(seat, start,duration)
+    def self.valid?(user,seat, start,duration)
+        p user+seat
+        p start
+        p duration
         seat = find_by(name: seat)
         start = Date.parse(start)
         if seat

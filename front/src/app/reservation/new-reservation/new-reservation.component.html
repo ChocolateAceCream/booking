@@ -1,0 +1,52 @@
+<section class="signup-form">
+        <br>
+        <br>
+    <form fxLayout="column"
+          fxLayoutAlign="center center"
+          #f="ngForm"
+          (ngSubmit)="onSubmit(f)"
+          fxLayoutGap="10px">
+        <mat-form-field hintLabel="Choose from A1-10,B1-10,C1-10">
+            <input
+                  matInput
+                  placeholder="Seat Number"
+                  ngModel
+                  name="seat"
+                  required
+                  #seatNumber="ngModel">
+            <mat-error *ngIf="seatNumber.hasError('required')">Field must not be empty</mat-error>
+        </mat-form-field>
+
+		<mat-form-field>
+			<input
+				  placeholder="Choose a starting date"
+				  [matDatepicker]="picker"
+				  matInput
+				  required
+				  ngModel name="startingDate">
+			<mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+			<mat-datepicker #picker></mat-datepicker>
+		</mat-form-field>
+
+        <mat-form-field >
+            <input
+                matInput
+                placeholder="Enter a duration (Days)"
+                ngModel
+                required
+				type="number"
+                name="duration"
+                #duration="ngModel">
+            <mat-error *ngIf="duration.hasError('required')">Field must not be empty</mat-error>
+        </mat-form-field>
+        <br>
+            <button
+                *ngIf="!isLoading"
+                [disabled]="f.invalid"
+                color="primary"
+                mat-raised-button
+                type="submit">Submit
+            </button>
+            <mat-spinner *ngIf="isLoading"></mat-spinner>
+    </form>
+</section>

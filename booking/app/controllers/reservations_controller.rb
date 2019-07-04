@@ -8,15 +8,16 @@ class ReservationsController < ApiController
 
 	def create
 		check = Seat.valid?(
+            params[:name],
 			params[:seat],
-			params[:start],
+			params[:date],
 			params[:duration]
 		)
 		if check == "booked"
 			reservation = Reservation.new_reservation(
 				@current_user.name,
 				params[:seat],
-				params[:start],
+				params[:date],
 				params[:duration]
 			)
 			@current_user.reservations << reservation

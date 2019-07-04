@@ -10,6 +10,7 @@ import { AuthService } from '../../auth/auth.service';
 export class HeaderComponent implements OnInit, OnDestroy {
     @Output() sidenavToggle = new EventEmitter<void>();
     isAuth: boolean = !!localStorage.getItem('accessToken');
+    currentUser = localStorage.getItem('currentUser');
     authSubscription: Subscription;
     constructor( private authService: AuthService) { }
 

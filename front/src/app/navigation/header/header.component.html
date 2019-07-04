@@ -1,6 +1,9 @@
 <mat-toolbar color="primary">
-    <div>
+    <div *ngIf="!isAuth">
         <a routerLink="/" >Booking App</a>
+    </div>
+    <div *ngIf="isAuth">
+        <a routerLink="/" >Hello, {{currentUser}}</a>
     </div>
     <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs >
         <ul fxLayout class="navigation-items" fxLayoutGap="10px">
