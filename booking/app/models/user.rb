@@ -4,17 +4,18 @@ class User
     include ActiveModel::SecureToken
     include Mongoid::Timestamps
 
+    field :name, type: String
     field :email, type: String
     field :password_digest, type: String
     field :token, type: String
     field :token_created_at, type: DateTime
     field :admin, type: Boolean
 
-    embeds_many :reservations
+    has_many :reservations
 
-    validates_presence_of :email, :password
+    validates_presence_of :name, :email, :password
     validates_uniqueness_of :email
-    validates_length_of :password, minimum: 8, maximum: 16
+    validates_length_of :password, minimum: 6, maximum: 16
     has_secure_password
     has_secure_token
 
@@ -29,10 +30,10 @@ class User
         end
     end
 
-    def self.valid_email?(email, password)
+    def self.valid_email?(name, email, password)
         user = find_by(email: email)
         if user == nil
-            user = User.create(email: email, password: password)
+            user = User.create(name: name, email: email, password: password)
             return user
         end
 
@@ -49,6 +50,10 @@ class User
 
     def logout
         invalidate_token
+    end
+
+    def self.clear_all
+        self.delete_all
     end
 
     private

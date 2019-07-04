@@ -2,7 +2,7 @@ class SessionsController < ApiController
     skip_before_action :require_login, only: [:login, :signup], raise: false
 
     def signup
-        if user = User.valid_email?(params[:email], params[:password])
+        if user = User.valid_email?(params[:name],params[:email], params[:password])
             user.allow_token_to_be_userd_only_once
             send_auth_token_for_valid_login_of(user)
         else
