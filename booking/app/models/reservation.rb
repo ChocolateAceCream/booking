@@ -24,4 +24,7 @@ class Reservation
         self.delete_all
     end
 
+    #after_save { ReservationBroadcastJob.perform_later(Reservation.collection.find().to_json)}
+    after_save {ActionCable.server.broadcast('reservation',Reservation.collection.find().to_json) }
+
 end
