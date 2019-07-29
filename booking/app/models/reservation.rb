@@ -2,16 +2,16 @@ class Reservation
     include Mongoid::Document
     field :name, type: String
     field :seat, type: String
-    field :start, type: Date
+    field :date, type: Date
     #minimum duration is 1 (day)
     field :duration, type: Integer
 
     belongs_to :user
 
-    def self.new_reservation(name, seat, start, duration)
-        start = Date.parse(start)
+    def self.new_reservation(name, seat, date, duration)
+        date = Date.parse(date)
         p name
-        reservation = Reservation.create(name: name, seat: seat, start: start, duration: duration)
+        reservation = Reservation.create(name: name, seat: seat, date: date, duration: duration)
         return reservation
 
     end
@@ -24,7 +24,7 @@ class Reservation
         self.delete_all
     end
 
-    #after_save { ReservationBroadcastJob.perform_later(Reservation.collection.find().to_json)}
-    after_save {ActionCable.server.broadcast('reservation',Reservation.collection.find().to_json) }
+    after_save { ReservationBroadcastJob.perform_later(Reservation.collection.find().to_json)}
+    #after_save {ActionCable.server.broadcast('reservation',Reservation.collection.find().to_json) }
 
 end

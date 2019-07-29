@@ -1,9 +1,6 @@
-=begin
 class ReservationBroadcastJob < ApplicationJob
     queue_as :default
-
     def perform(reservations)
-        ActionCable.server.broadcast('reservations',reservations)
+        ActionCable.server.broadcast('reservation',reservations)
     end
 end
-=end

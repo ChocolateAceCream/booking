@@ -3,18 +3,18 @@ class Seat
     field :name, type: String
     field :date, type: Hash, default: {}
 
-    def self.valid?(user,seat, start,duration)
+    def self.valid?(user,seat, date,duration)
         p user+seat
-        p start
+        p date
         p duration
         seat = find_by(name: seat)
-        start = Date.parse(start)
+        date = Date.parse(date)
         if seat
             temp = seat.date
             duration =duration.to_i
             booked = []
             (0..duration-1).each do |i|
-                str = (start+i) #str is Date object
+                str = (date+i) #str is Date object
                 if temp[str.to_s]
                     booked << str
                 end
@@ -22,7 +22,7 @@ class Seat
 
             if booked.empty?
                 (0..duration-1).each do |i|
-                    str = start+i
+                    str = date+i
                     temp[str.to_s] = 1
                 end
                 seat.update(:name=> seat.name,:date => temp)

@@ -22,16 +22,13 @@ export class AllReservationComponent implements OnInit,AfterViewInit {
     constructor(private reservationService: ReservationService) { }
 
     ngOnInit() {
+        this.reservationService.getAllReservations();
         this.reChangedSubscription = this.reservationService.reChanged.subscribe(
             (reservations: Reservation[]) => {
                 console.log(reservations);
-
                 this.dataSource.data = reservations;
             }
         )
-        this.interval = setInterval(()=> {
-            this.reservationService.getAllReservations();
-        },5000);
     }
 
     ngAfterViewInit() {
